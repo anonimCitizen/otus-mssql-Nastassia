@@ -141,10 +141,10 @@ SELECT	c.CustomerID,
 		c.CustomerName,
 		c.PhoneNumber
 FROM	Sales.Customers c
-INNER	JOIN	Sales.Orders o
+INNER	JOIN	Sales.Invoices o
 	ON	o.CustomerID = c.CustomerID
-INNER	JOIN	Sales.OrderLines l
-	ON	l.OrderId = o.OrderID
+INNER	JOIN	Sales.InvoiceLines l
+	ON	l.InvoiceID = o.InvoiceId
 INNER	JOIN	Warehouse.StockItems si
 	ON	si.StockItemID = l.StockItemID
 WHERE	si.StockItemName = N'Chocolate frogs 250g'
