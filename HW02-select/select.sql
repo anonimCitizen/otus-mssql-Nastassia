@@ -82,21 +82,9 @@ INNER	JOIN	Sales.OrderLines l
 	ON	l.OrderId = o.OrderId
 INNER	JOIN	Sales.Customers c
 	ON	c.CustomerID = o.CustomerID
-WHERE	(l.UnitPrice > 100 
-OR		l.Quantity > 20)
+WHERE	(l.UnitPrice > 100 OR l.Quantity > 20)
 AND		l.PickingCompletedWhen IS NOT NULL
-ORDER BY			CASE
-			WHEN MONTH(o.OrderDate) BETWEEN 1 AND 3 THEN 1
-			WHEN MONTH(o.OrderDate) BETWEEN 4 AND 6 THEN 2
-			WHEN MONTH(o.OrderDate) BETWEEN 7 AND 9 THEN 3
-			ELSE 4
-		END,
-		CASE
-			WHEN MONTH(o.OrderDate) BETWEEN 1 AND 4 THEN 1
-			WHEN MONTH(o.OrderDate) BETWEEN 5 AND 8 THEN 2
-			ELSE 3
-		END,
-		o.OrderDate
+ORDER BY	[Quarter], Third, o.OrderDate
 OFFSET	1000 ROWS FETCH NEXT 100 ROWS ONLY
 
 /*
@@ -141,7 +129,7 @@ INNER	JOIN	Sales.Customers c
 	ON	o.CustomerID = c.CustomerID
 INNER	JOIN	Application.People p
 	ON	o.SalespersonPersonID = p.PersonID
-ORDER BY	OrderDate desc
+ORDER BY	OrderDate DESC
 
 /*
 6. Все ид и имена клиентов и их контактные телефоны,
