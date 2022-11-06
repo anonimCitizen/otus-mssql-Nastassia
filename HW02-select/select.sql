@@ -124,12 +124,12 @@ AND		po.IsOrderFinalized = 1
 */
 
 SELECT	TOP 10 c.CustomerName, p.FullName
-FROM	Sales.Orders o
+FROM	Sales.Invoices i
 INNER	JOIN	Sales.Customers c
-	ON	o.CustomerID = c.CustomerID
+	ON	i.CustomerID = c.CustomerID
 INNER	JOIN	Application.People p
-	ON	o.SalespersonPersonID = p.PersonID
-ORDER BY	OrderDate DESC
+	ON	i.SalespersonPersonID = p.PersonID
+ORDER BY	InvoiceDate DESC
 
 /*
 6. Все ид и имена клиентов и их контактные телефоны,
